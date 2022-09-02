@@ -2,10 +2,13 @@ let userPattern = [];
 let machinePattern = [];
 let colorGroups = ["red", "green","blue", "yellow"];
 let level = 0;
-
+let start = false;
 
 $(document).keydown(()=>{
+    if(!start){
     palyGame();
+    start = true;
+    }
   }); 
 
 
@@ -26,19 +29,21 @@ const palyGame = ()=>{
     userPattern = [];
     machinePattern = [];
     level = 0;
+    start = false;
   };
 
 
 
 
-  $('.btn').click(()=>{ 
+  $('.btn').click(function (){ 
 
     // //Gives name "red";
     
-    let chosenColor =this.id;
+    let chosenColor = this.id;
     userPattern.push(chosenColor);
-
-    // PlayAudio(this.id);
+    // console.log(this.id)
+    // console.log(chosenColor);
+    // // PlayAudio(this.id);
 
     // clicked(this.id);
     PlayAudio(chosenColor);
@@ -63,7 +68,7 @@ const checkPattern = ()=>{
                     palyGame();
                 }, 1500);
                 
-        }
+            }
         
     }
     else{
@@ -98,13 +103,3 @@ const PlayAudio = (id)=>{
 
 };
 
-const NextPattern = ()=>{
-    let index = Math.floor(Math.random()*4);
-    let color = colorGroups[index];
-
-    machinePattern.push(color);
-
-    PlayAudio(color);
-    clicked(color);
-    
-};
